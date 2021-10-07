@@ -11,59 +11,59 @@ import Notiflix from 'notiflix';
 const baseUrl = 'https://restcountries.com/v3.1/name/';
 const inputForm = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
-const countryInfo = document.querySelector('.country-info');
+const countryCard = document.querySelector('.country-info');
 
 inputForm.addEventListener('input', debounce(getData), DEBOUNCE_DELAY);
 
 function getData(e) {
     const inputData = inputForm.value.trim();
-    console.log(inputData)
-    // const inputData = e.currentTarget.value;
+    countryCard.innerHTML = '';
+    countryList.innerHTML = '';
+
     if (!inputData) {
         return;
     };
     fetchCountries(inputData)
         .then((data) => {
             console.log(data)
+            if (data.status === 404) {
+                Notiflix.Notify.info("Oops, there is no country with that name.")
+            };
             if (data.length > 10) {
-                Notiflix.Notify.info('too many')
+                return Notiflix.Notify.info("Too many matches found. Please enter a more specific name.")
             };
             if (data.length === 1) {
-                printOne(data)
+                return printOne(data)
             };
-            printMany(data);
+            return printMany(data);
         })
-        .catch((error) => Notiflix.Notify.info(error))
+        .catch((error) => console.log(error))
 };
 
-
-
-
 function printMany(data) {
+    countryCard.innerHTML = '';
+
     const markUp = data.map((item) => {
         return `<li class="country-list-item">
-                <img src='${item.flag}' alt='${item.name} flag' width='100' />
-                <p><b>${item.name}</b></p>
-            </li>`;
+                    <img src='${item.flag}' alt='${item.name} flag' width='100' />
+                    <p><b>${item.name}</b></p>
+                </li>`;
     }).join("");
-    // console.log(markUp)
     countryList.innerHTML = markUp;
-
 }
 
-
-
-
-
 function printOne(data) {
+    countryList.innerHTML = '';
+
     const markUp = data.map((item) => {
-        `<li class="country-list-item">
-            <img src='${item.flag}' alt='${item.name} flag' width='100' />
-            <p><b>${item.name}</b></p>
-        </li>`;
+        return `<div class="country-info-card">
+                    <img src='${item.flag}' alt='${item.name} flag' width='200' />
+                    <h2>${item.name}</h2>
+                    <p><b>Capital</b>: ${item.capital}</p>
+                    <p><b>Population</b>: ${item.population}</p>
+                    <p><b>Languages</b>: ${item.languages.map(key => ` ${key.name}`)}</p>
+                </div>`;
     }).join("");
-
-    countryInfo.innerHTML = markUp;
-
+    countryCard.innerHTML = markUp;
 }
 

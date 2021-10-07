@@ -18,3 +18,50 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.country-list-item {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(148, 38, 133);
+  border-radius: 10px;
+  padding: 25px 50px;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.country-list-item img {
+  display: block;
+  margin: 0 auto;
+}
+
+.country-list-item p {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.country-info-card {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(60, 199, 17);
+  border-radius: 10px;
+  padding: 25px 50px;
+  max-width: 400px;
+}
+
+.country-info-card img {
+  display: block;
+  margin: 0 auto;
+}
+
+.country-info-card h2 {
+  font-size: 34px;
+  line-height: 1.2;
+
+}
+
+.country-info-card p {
+  font-size: 24px;
+  line-height: 1.2;
+}
