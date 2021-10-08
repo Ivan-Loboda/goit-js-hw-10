@@ -15,10 +15,16 @@ const countryCard = document.querySelector('.country-info');
 
 inputForm.addEventListener('input', debounce(getData, DEBOUNCE_DELAY));
 
-function getData(e) {
-    const inputData = inputForm.value.trim();
+function clearCards() {
     countryCard.innerHTML = '';
     countryList.innerHTML = '';
+}
+
+function getData(e) {
+    const inputData = inputForm.value.trim();
+    // countryCard.innerHTML = '';
+    // countryList.innerHTML = '';
+    clearCards();
 
     if (!inputData) {
         return;
@@ -41,7 +47,9 @@ function getData(e) {
 };
 
 function printMany(data) {
-    countryCard.innerHTML = '';
+    // countryCard.innerHTML = '';
+    clearCards();
+
     const markUp = data.map((item) => {
         const { name, flag } = item;
         return `<li class="country-list-item">
@@ -53,8 +61,9 @@ function printMany(data) {
 }
 
 function printOne(data) {
-    countryList.innerHTML = '';
-    console.log(data)
+    // countryList.innerHTML = '';
+    clearCards();
+
     const markUp = data.map((item) => {
         const { name, capital, flag, population, languages } = item;
         // console.log(languages)
