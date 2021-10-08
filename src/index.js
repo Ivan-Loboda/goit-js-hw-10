@@ -26,6 +26,7 @@ function getData(e) {
     fetchCountries(inputData)
         .then((data) => {
             // console.log(data)
+            // if (!data) return false;
             if (data.status === 404) {
                 Notiflix.Notify.info("Oops, there is no country with that name.")
             };
@@ -57,6 +58,7 @@ function printOne(data) {
 
     const markUp = data.map((item) => {
         const { name, capital, flag, population, languages } = item;
+        console.log(languages)
         return `<div class="country-info-card">
                     <img src='${flag}' alt='${name} flag' width='200' />
                     <h2>${name}</h2>
