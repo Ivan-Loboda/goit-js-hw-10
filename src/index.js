@@ -64,7 +64,7 @@ function printOne(data) {
                     <h2>${name}</h2>
                     <p><b>Capital</b>: ${capital}</p>
                     <p><b>Population</b>: ${population}</p>
-                    <p><b>Languages</b>: ${languages.map(key => key.name)}</p>
+                    <p><b>Languages</b>: ${languages[0].name}</p>
                 </div>`;
     }).join("");
     countryCard.innerHTML = markUp;
