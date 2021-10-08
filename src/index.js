@@ -37,7 +37,7 @@ function getData(e) {
             };
             return printMany(data);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.error(error))
 };
 
 function printMany(data) {
