@@ -42,11 +42,11 @@ function getData(e) {
 
 function printMany(data) {
     countryCard.innerHTML = '';
-
     const markUp = data.map((item) => {
+        const { name, flag } = item;
         return `<li class="country-list-item">
-                    <img src='${item.flag}' alt='${item.name} flag' width='100' />
-                    <p><b>${item.name}</b></p>
+                    <img src='${flag}' alt='${name} flag' width='100' />
+                    <p><b>${name}</b></p>
                 </li>`;
     }).join("");
     countryList.innerHTML = markUp;
@@ -56,12 +56,13 @@ function printOne(data) {
     countryList.innerHTML = '';
 
     const markUp = data.map((item) => {
+        const { name, capital, flag, population, languages } = item;
         return `<div class="country-info-card">
-                    <img src='${item.flag}' alt='${item.name} flag' width='200' />
-                    <h2>${item.name}</h2>
-                    <p><b>Capital</b>: ${item.capital}</p>
-                    <p><b>Population</b>: ${item.population}</p>
-                    <p><b>Languages</b>: ${item.languages.map(key => key.name)}</p>
+                    <img src='${flag}' alt='${name} flag' width='200' />
+                    <h2>${name}</h2>
+                    <p><b>Capital</b>: ${capital}</p>
+                    <p><b>Population</b>: ${population}</p>
+                    <p><b>Languages</b>: ${languages.map(key => key.name)}</p>
                 </div>`;
     }).join("");
     countryCard.innerHTML = markUp;
