@@ -13,7 +13,7 @@ const inputForm = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryCard = document.querySelector('.country-info');
 
-inputForm.addEventListener('input', debounce(getData), DEBOUNCE_DELAY);
+inputForm.addEventListener('input', debounce(getData, DEBOUNCE_DELAY));
 
 function getData(e) {
     const inputData = inputForm.value.trim();
@@ -25,10 +25,9 @@ function getData(e) {
     };
     fetchCountries(inputData)
         .then((data) => {
-            // console.log(data)
-            // if (!data) return false;
+            console.log(data)
             if (data.status === 404) {
-                Notiflix.Notify.info("Oops, there is no country with that name.")
+                return Notiflix.Notify.info("Oops, there is no country with that name.")
             };
             if (data.length > 10) {
                 return Notiflix.Notify.info("Too many matches found. Please enter a more specific name.")
@@ -55,10 +54,10 @@ function printMany(data) {
 
 function printOne(data) {
     countryList.innerHTML = '';
-
+    console.log(data)
     const markUp = data.map((item) => {
         const { name, capital, flag, population, languages } = item;
-        console.log(languages)
+        // console.log(languages)
         return `<div class="country-info-card">
                     <img src='${flag}' alt='${name} flag' width='200' />
                     <h2>${name}</h2>
